@@ -17,6 +17,7 @@ class Event(ExtendedModel):
     date_start = models.DateTimeField(blank=True, null=True, verbose_name='Дата и время начала')
     date_end = models.DateTimeField(blank=True, null=True, verbose_name='Дата и время конца')
     department = models.ForeignKey(Department, on_delete=models.PROTECT, verbose_name='Подразделение')
+    participants = models.ManyToManyField(User, related_name='events', verbose_name='Участники')
     status = models.PositiveSmallIntegerField(choices=EventStatus.choices, default=EventStatus.PENDING, verbose_name='Статус')
 
     def __str__(self):
