@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'debug_toolbar',
     'django_extensions',
+    'drf_spectacular',
     'drf_spectacular_sidecar',
     'imagekit',
     'rest_framework',
