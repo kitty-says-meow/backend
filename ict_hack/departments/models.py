@@ -23,3 +23,6 @@ class Department(ExtendedModel):
     link = models.URLField(verbose_name='Ссылка')
     logo = models.ImageField(upload_to=department_logo_upload, verbose_name='Логотип')
     owner = models.ForeignKey(User, on_delete=models.PROTECT, related_name='departments', verbose_name='Руководитель')
+
+    def __str__(self):
+        return f'[{self.pk}] {self.name}'
