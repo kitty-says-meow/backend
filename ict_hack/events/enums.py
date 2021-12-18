@@ -10,4 +10,10 @@ class EventCategory(models.IntegerChoices):
 
 
 class EventStatus(models.IntegerChoices):
-    pass
+    PENDING = 1, 'На рассмотрении'
+    ACCEPTED = 2, 'Мероприятие одобрено'
+    REJECTED = 3, 'Мероприятие отклонено'
+    PENDING_REPORT = 4, 'Ожидается отправка отчёта'
+    PENDING_REPORT_CONFIRMATION = 5, 'Ожидается утверждение отчёта'
+    REPORT_ACCEPTED = 6, 'Отчёт утверждён'
+    REPORT_REJECTED = 7, 'Отчёт отлконён'
