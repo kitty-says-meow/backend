@@ -2,7 +2,7 @@ include .env
 export
 
 init:
-	mkdir data && cp .env.sample .env && docker volume create --name ict_hack_db -d local
+	mkdir data && docker volume create --name ict_hack_db -d local
 
 dev:
 	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
