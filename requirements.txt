@@ -13,5 +13,6 @@ djangorestframework-camel-case
 drf-spectacular
 drf-spectacular-sidecar
 mozilla-django-oidc
+sentry-sdk
 Werkzeug
 Pillow

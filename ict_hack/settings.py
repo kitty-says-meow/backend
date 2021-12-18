@@ -14,7 +14,8 @@ import os
 import sys
 
 import environ
-from django.urls import reverse_lazy
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -263,3 +264,13 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_USER_MODEL = 'users.User'
+
+# Sentry integration
+sentry_sdk.init(
+    dsn=env('SENTRY_DSN', default=None),
+    debug=env('SENTRY_DEBUG', cast=bool, default=DEBUG),
+    environment=env('SENTRY_ENVIRONMENT', default=None),
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+    send_default_pii=True,
+)
