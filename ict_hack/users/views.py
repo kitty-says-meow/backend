@@ -23,6 +23,7 @@ class ProfilePermission(IsAuthenticated):
 @extend_schema_view(
     retrieve=users_profile_schema,
     profile=users_profile_schema,
+    rating=users_rating_schema,
     search=users_search_schema,
     score_convert=users_score_convert_schema,
     score_send=users_score_send_schema,
