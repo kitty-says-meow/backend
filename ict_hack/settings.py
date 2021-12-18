@@ -239,6 +239,7 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION':              'ICT.HACK API',
     'SCHEMA_PATH_PREFIX':       '/api',
     'SCHEMA_PATH_PREFIX_TRIM':  False,
+    'SERVE_INCLUDE_SCHEMA':     False,
     'SWAGGER_UI_SETTINGS':      '''{
         "deepLinking": true, 
         "oauth2RedirectUrl": `${window.location.protocol}//${window.location.host}/api/static/drf_spectacular_sidecar/swagger-ui-dist/oauth2-redirect.html`,
