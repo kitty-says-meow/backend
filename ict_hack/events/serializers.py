@@ -9,7 +9,7 @@ from events.models import Event
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ('id', 'name', 'category', 'date_start', 'date_end', 'department', 'achievements')
+        fields = ('id', 'name', 'description', 'category', 'date_start', 'date_end', 'department', 'achievements')
 
     department = DepartmentField()
     achievements = AchievementCreateSerializer(many=True)
