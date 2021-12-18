@@ -12,7 +12,7 @@ from rest_framework.viewsets import GenericViewSet
 from users.filters import UserFilter
 from users.models import User
 from users.openapi import *
-from users.serializers import ProfileSerializer, UserSerializer, ScoreOperationSerializer
+from users.serializers import ProfileSerializer, UserSerializer, ScoreOperationSerializer, RatingSerializer
 
 
 class ProfilePermission(IsAuthenticated):
@@ -84,3 +84,8 @@ class UsersViewSet(GenericViewSet, RetrieveModelMixin):
             raise ValidationError({'score': 'Недостаточно средств.'})
         else:
             return Response(status=200)
+
+    @action(detail=False, methods=['GET'], serializer_class=RatingSerializer)
+    def rating(self, request, *args, **kwargs):
+        self.queryset = User.objects.filter(is_staff=False).order_by('-pgas_score')
+        return self.search(request, *args, **kwargs)
