@@ -68,7 +68,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'simple_history',
 
+    'achievements',
     'departments',
+    'events',
     'users',
 ]
 
