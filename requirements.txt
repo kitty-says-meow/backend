@@ -1,0 +1,17 @@
+Django~=3.2
+django-cors-headers
+django-currentuser
+django-debug-toolbar
+django-environ
+django-extensions
+django-filter
+django-hitcount
+django-imagekit
+django-simple-history
+djangorestframework
+djangorestframework-camel-case
+drf-spectacular
+drf-spectacular-sidecar
+mozilla-django-oidc
+Werkzeug
+Pillow

@@ -1,0 +1,12 @@
+*.py[cod]
+__pycache__/
+
+.idea/
+
+/*.env
+/ict_hack/settings_local.py
+
+*.sqlite3
+*.db
+
+/data/
