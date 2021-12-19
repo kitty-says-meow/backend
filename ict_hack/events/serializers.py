@@ -20,7 +20,7 @@ class EventSerializer(serializers.ModelSerializer):
         read_only_fields = ('report', 'status')
 
     department = DepartmentField()
-    achievements = AchievementSerializer(many=True)
+    achievements = AchievementSerializer(many=True, allow_empty=False)
     participants = ParticipantSerializer(many=True, read_only=True)
 
     def validate(self, attrs):
