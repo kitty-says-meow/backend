@@ -3,6 +3,7 @@ from uuid import uuid4
 from django.db import models
 from django.db.models import F
 
+from attachments.models import Image
 from departments.models import Department
 from events.enums import EventCategory, EventStatus
 from users.models import User
@@ -24,6 +25,7 @@ class Event(ExtendedModel):
     date_start = models.DateTimeField(blank=True, null=True, verbose_name='Дата и время начала')
     date_end = models.DateTimeField(blank=True, null=True, verbose_name='Дата и время конца')
     department = models.ForeignKey(Department, on_delete=models.PROTECT, verbose_name='Подразделение')
+    image = models.ForeignKey(Image, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Изображение')
     participants = models.ManyToManyField(User, blank=True, related_name='events', verbose_name='Участники')
     report = models.FileField(blank=True, null=True, upload_to=event_report_upload, verbose_name='Отчёт')
     status = models.PositiveSmallIntegerField(choices=EventStatus.choices, default=EventStatus.PENDING, verbose_name='Статус')

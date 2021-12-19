@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'simple_history',
 
     'achievements',
+    'attachments',
     'departments',
     'events',
     'trophies',

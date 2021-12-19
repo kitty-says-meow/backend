@@ -20,10 +20,12 @@ from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 from rest_framework.routers import DefaultRouter
 
+from attachments.views import ImageViewSet
 from events.views import EventsViewSet
 from users.views import UsersViewSet
 
 router = DefaultRouter(trailing_slash=False)
+router.register('images', ImageViewSet)
 router.register('events', EventsViewSet)
 router.register('users', UsersViewSet)
 

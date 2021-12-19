@@ -3,6 +3,7 @@ from rest_framework.exceptions import ValidationError
 
 from achievements.models import Achievement
 from achievements.serializers import AchievementSerializer
+from attachments.fields import ImageField
 from departments.fields import DepartmentField
 from events.enums import EventStatus
 from events.models import Event
@@ -14,12 +15,13 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = (
-            'id', 'name', 'description', 'category', 'date_start', 'date_end', 'department', 'report', 'status', 'achievements',
-            'participants',
+            'id', 'name', 'description', 'category', 'date_start', 'date_end', 'department', 'image', 'report', 'status',
+            'achievements', 'participants',
         )
         read_only_fields = ('report', 'status')
 
     department = DepartmentField()
+    image = ImageField(required=False, allow_null=True)
     achievements = AchievementSerializer(many=True, allow_empty=False)
     participants = ParticipantSerializer(many=True, read_only=True)
 
@@ -31,9 +33,16 @@ class EventSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         achievements_data = validated_data.pop('achievements', [])
+
         instance = super().create(validated_data)
+
+        if not (instance.date_start and instance.date_end):
+            instance.status = EventStatus.PENDING_REPORT
+            instance.save()
+
         achievements = [Achievement(event=instance, **item) for item in achievements_data]
         Achievement.objects.bulk_create(achievements)
+
         return instance
 
 
