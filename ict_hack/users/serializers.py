@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from achievements.serializers import UserAchievementSerializer
 from departments.serializers import DepartmentSerializer
 from users.models import User
 
@@ -8,9 +9,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'username', 'first_name', 'last_name', 'pgas_score', 'personal_score',
+            'username', 'first_name', 'last_name', 'pgas_score', 'personal_score', 'achievements',
         )
         read_only_fields = fields
+
+    achievements = UserAchievementSerializer(many=True, source='achievements_confirmed')
 
 
 class ProfileSerializer(UserSerializer):
