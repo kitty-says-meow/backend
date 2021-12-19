@@ -22,6 +22,7 @@ class Trophy(ExtendedModel):
     class Meta:
         verbose_name = 'Трофей'
         verbose_name_plural = 'Трофеи'
+        ordering = ('code',)
 
     code = models.PositiveSmallIntegerField(choices=Trophies.choices, verbose_name='Код')
     name = models.CharField(max_length=50, verbose_name='Название')
