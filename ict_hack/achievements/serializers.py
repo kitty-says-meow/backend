@@ -24,11 +24,12 @@ class UserAchievementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Achievement
         fields = (
-            'id', 'name', 'score', 'event', 'image'
+            'id', 'name', 'score', 'event', 'category', 'image'
         )
         read_only_fields = fields
 
-    event = serializers.CharField(source='event.name', read_only=True)
+    event = serializers.ReadOnlyField(source='event.name')
+    category = serializers.ReadOnlyField(source='event.category')
     image = serializers.SerializerMethodField()
 
     # image = serializers.ImageField(source='event.image', read_only=True)
