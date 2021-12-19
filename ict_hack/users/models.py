@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from events.enums import EventStatus
+from trophies.models import Trophy
 
 
 class User(AbstractUser):
@@ -11,3 +12,7 @@ class User(AbstractUser):
     @property
     def achievements_confirmed(self):
         return self.achievements.filter(event__status=EventStatus.REPORT_ACCEPTED)
+
+    @property
+    def trophies(self):
+        return Trophy.objects.all()

@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'achievements',
     'departments',
     'events',
+    'trophies',
     'users',
 ]
 
