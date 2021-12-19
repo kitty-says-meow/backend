@@ -17,10 +17,11 @@ class EventSerializer(serializers.ModelSerializer):
             'id', 'name', 'description', 'category', 'date_start', 'date_end', 'department', 'report', 'status', 'achievements',
             'participants',
         )
+        read_only_fields = ('report', 'status')
 
     department = DepartmentField()
     achievements = AchievementSerializer(many=True)
-    participants = ParticipantSerializer(many=True)
+    participants = ParticipantSerializer(many=True, read_only=True)
 
     def validate(self, attrs):
         date_start, date_end = attrs.get('date_start'), attrs.get('date_end')
