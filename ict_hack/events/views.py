@@ -15,7 +15,8 @@ from events.serializers import EventSerializer, EventReportSerializer
 
 class EventReportPermission(IsAuthenticated):
     def has_object_permission(self, request, view, obj):
-        return obj.status == EventStatus.PENDING_REPORT and obj.department in request.user.departments.all()
+        return obj.status in [EventStatus.ACCEPTED,
+                              EventStatus.PENDING_REPORT] and obj.department in request.user.departments.all()
 
 
 class EventJoinPermission(IsAuthenticated):
