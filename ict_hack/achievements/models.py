@@ -14,7 +14,8 @@ class Achievement(ExtendedModel):
     event = models.ForeignKey(Event, on_delete=models.PROTECT, null=True, related_name='achievements', verbose_name='Мероприятие')
     name = models.CharField(max_length=100, verbose_name='Название')
     score = models.PositiveSmallIntegerField(validators=[MinValueValidator(1)], verbose_name='Баллы')
-    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, related_name='achievements', verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True, related_name='achievements',
+                             verbose_name='Пользователь')
 
     def __str__(self):
         return f'[{self.pk}] {self.name} ({self.score} баллов)'
