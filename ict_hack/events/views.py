@@ -36,6 +36,10 @@ class EventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin, ListMo
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ('category',)
 
+    def list(self, request, *args, **kwargs):
+        self.queryset = super().get_queryset().filter(status=EventStatus.ACCEPTED)
+        return super().list(request, *args, **kwargs)
+
     @action(detail=False, methods=['GET'])
     def my(self, request, *args, **kwargs):
         self.queryset = super().get_queryset().filter(department__in=self.request.user.departments.all())
