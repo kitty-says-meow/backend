@@ -4,7 +4,6 @@ from django.utils.functional import classproperty
 from rest_framework import serializers
 
 from achievements.models import Achievement
-from users.models import User
 
 
 class AchievementSerializer(serializers.ModelSerializer):
@@ -17,7 +16,7 @@ class AchievementSerializer(serializers.ModelSerializer):
             writable_fields = ('name', 'score',)
             return list(filter(lambda field: field not in writable_fields, cls.fields))
 
-    user = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='username')
+    user = serializers.SlugRelatedField(slug_field='username', read_only=True)
 
 
 class UserAchievementSerializer(serializers.ModelSerializer):
