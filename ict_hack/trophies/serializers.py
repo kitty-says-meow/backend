@@ -9,7 +9,7 @@ from users.models import User
 class TrophySerializer(serializers.ModelSerializer):
     class Meta:
         model = Trophy
-        fields = ('code', 'name', 'description', 'category', 'has_trophy')
+        fields = ('code', 'name', 'description', 'category', 'icon', 'has_trophy')
 
     has_trophy = serializers.SerializerMethodField(method_name='check_has_trophy')
 
