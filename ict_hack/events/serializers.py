@@ -42,6 +42,7 @@ class EventReportSerializer(serializers.ModelSerializer):
         model = Event
         fields = ('report', 'users',)
 
+    report = serializers.FileField(required=True, allow_null=False)
     users = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='username', many=True)
 
     def update(self, instance, validated_data):
