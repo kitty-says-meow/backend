@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'username', 'first_name', 'last_name', 'pgas_score', 'personal_score', 'achievements', 'trophies',
+            'username', 'first_name', 'last_name', 'avatar', 'pgas_score', 'personal_score', 'achievements', 'trophies',
         )
         read_only_fields = fields
 
@@ -45,6 +45,6 @@ class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'username', 'first_name', 'last_name',
+            'username', 'first_name', 'last_name', 'avatar'
         )
         read_only_fields = fields

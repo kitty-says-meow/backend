@@ -6,6 +6,7 @@ from trophies.models import Trophy
 
 
 class User(AbstractUser):
+    avatar = models.URLField(blank=True, null=True, verbose_name='Ссылка на аватар')
     pgas_score = models.PositiveIntegerField(default=0, verbose_name='Баллы ПГАС')
     personal_score = models.PositiveIntegerField(default=0, verbose_name='Личные баллы')
 

@@ -25,6 +25,7 @@ class KeycloakOIDCAuthenticationBackend(OIDCAuthenticationBackend):
     def update_user(self, user, claims):
         user.first_name = claims.get('given_name', '')
         user.last_name = claims.get('family_name', '')
+        user.avatar = claims.get('avatar_url', None)
         user.last_login = timezone.now()
         user.save()
 
