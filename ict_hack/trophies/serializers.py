@@ -14,8 +14,8 @@ class TrophySerializer(serializers.ModelSerializer):
     has_trophy = serializers.SerializerMethodField(method_name='check_has_trophy')
 
     def check_has_trophy(self, obj) -> bool:
-        request = self.context.get('request')
-        user = request.user if request else None
+        view = self.context.get('view')
+        user = view.get_object() if view else None
 
         get_count = lambda category: Achievement.objects.filter(
             event__category=category, event__status=EventStatus.REPORT_ACCEPTED, user=user).count()
