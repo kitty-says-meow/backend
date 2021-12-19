@@ -12,7 +12,7 @@ from rest_framework.viewsets import GenericViewSet
 from users.filters import UserFilter
 from users.models import User
 from users.openapi import *
-from users.serializers import ProfileSerializer, UserSerializer, ScoreOperationSerializer, RatingSerializer
+from users.serializers import ProfileSerializer, UserSerializer, ScoreOperationSerializer, RatingSerializer, ParticipantSerializer
 
 
 class ProfilePermission(IsAuthenticated):
@@ -34,7 +34,7 @@ class UsersViewSet(GenericViewSet, RetrieveModelMixin):
     lookup_field = 'username'
     filterset_class = UserFilter
 
-    @action(detail=False, methods=['GET'], filter_backends=(DjangoFilterBackend,))
+    @action(detail=False, methods=['GET'], filter_backends=(DjangoFilterBackend,), serializer_class=ParticipantSerializer)
     def search(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
 
