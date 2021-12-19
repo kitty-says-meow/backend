@@ -21,7 +21,7 @@ class ProfilePermission(IsAuthenticated):
 
 
 @extend_schema_view(
-    retrieve=users_profile_schema,
+    retrieve=users_retrieve_schema,
     profile=users_profile_schema,
     rating=users_rating_schema,
     search=users_search_schema,
