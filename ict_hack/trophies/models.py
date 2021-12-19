@@ -19,7 +19,14 @@ class Trophies(models.IntegerChoices):
 
 
 class Trophy(ExtendedModel):
+    class Meta:
+        verbose_name = 'Трофей'
+        verbose_name_plural = 'Трофеи'
+
     code = models.PositiveSmallIntegerField(choices=Trophies.choices, verbose_name='Код')
     name = models.CharField(max_length=50, verbose_name='Название')
     description = models.CharField(max_length=200, verbose_name='Описание')
     category = models.PositiveSmallIntegerField(choices=EventCategory.choices, blank=True, null=True, verbose_name='Категория')
+
+    def __str__(self):
+        return f'[Код {self.code}] {self.name}'
