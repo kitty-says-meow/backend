@@ -22,6 +22,7 @@ class EventReportPermission(IsAuthenticated):
     create=events_create_schema,
     retrieve=events_retrieve_schema,
     list=events_list_schema,
+    my=events_report_schema,
     report=events_report_schema,
 )
 class EventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin, ListModelMixin):
@@ -29,6 +30,11 @@ class EventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin, ListMo
     serializer_class = EventSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ('category',)
+
+    @action(detail=False, methods=['GET'])
+    def my(self, request, *args, **kwargs):
+        self.queryset = super().get_queryset().filter(department__in=self.request.user.departments.all())
+        return super().list(request, *args, **kwargs)
 
     @action(detail=True, methods=['POST'], serializer_class=EventReportSerializer, permission_classes=[EventReportPermission],
             parser_classes=[CamelCaseMultiPartParser])
