@@ -16,7 +16,7 @@ class Achievement(ExtendedModel):
     score = models.PositiveSmallIntegerField(validators=[MinValueValidator(1)], verbose_name='Баллы')
     user = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True, related_name='achievements',
                              verbose_name='Пользователь')
-    pgas_converted = models.BooleanField(default=False, verbose_name='Начислены баллы ПГАС')
+    pgas_converted = models.DateTimeField(default=None, blank=True, null=True, verbose_name='Начислены баллы ПГАС (дата)')
 
     def __str__(self):
         return f'[{self.pk}] {self.name} ({self.score} баллов)'

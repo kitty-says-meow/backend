@@ -2,6 +2,7 @@ from uuid import uuid4
 
 from django.db import models
 from django.db.models import F
+from django.utils import timezone
 
 from attachments.models import Image
 from departments.models import Department
@@ -35,11 +36,11 @@ class Event(ExtendedModel):
 
     def save(self, *args, **kwargs):
         if self.status == EventStatus.REPORT_ACCEPTED:
-            achievements = self.achievements.filter(pgas_converted=False)
+            achievements = self.achievements.filter(pgas_converted=None)
             for achievement in achievements:
                 user = achievement.user
                 if user:
                     user.pgas_score = F('pgas_score') + achievement.score
                     user.save()
-            achievements.update(pgas_converted=True)
+            achievements.update(pgas_converted=timezone.now())
         super().save(*args, **kwargs)
