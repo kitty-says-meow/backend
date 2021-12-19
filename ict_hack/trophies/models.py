@@ -18,6 +18,10 @@ class Trophies(models.IntegerChoices):
     PGAS_TOP3 = 11, 'Топ-3 в рейтинге'
 
 
+def trophy_icon_upload(instance, filename):
+    return f'trophies/icons/{instance.code}.svg'
+
+
 class Trophy(ExtendedModel):
     class Meta:
         verbose_name = 'Трофей'
@@ -28,6 +32,7 @@ class Trophy(ExtendedModel):
     name = models.CharField(max_length=50, verbose_name='Название')
     description = models.CharField(max_length=200, verbose_name='Описание')
     category = models.PositiveSmallIntegerField(choices=EventCategory.choices, blank=True, null=True, verbose_name='Категория')
+    icon = models.FileField(upload_to=trophy_icon_upload, verbose_name='Иконка')
 
     def __str__(self):
         return f'[Код {self.code}] {self.name}'
