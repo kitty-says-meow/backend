@@ -1,9 +1,8 @@
-from typing import Union
-
 from django.utils.functional import classproperty
 from rest_framework import serializers
 
 from achievements.models import Achievement
+from events.models import Event
 
 
 class AchievementSerializer(serializers.ModelSerializer):
@@ -19,19 +18,19 @@ class AchievementSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(slug_field='username', read_only=True)
 
 
+class UserAchievementEvent(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = ('id', 'name', 'category',)
+        read_only_fields = fields
+
+
 class UserAchievementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Achievement
         fields = (
-            'id', 'name', 'score', 'event', 'category', 'image'
+            'id', 'name', 'score', 'event'
         )
         read_only_fields = fields
 
-    event = serializers.ReadOnlyField(source='event.name')
-    category = serializers.ReadOnlyField(source='event.category')
-    image = serializers.SerializerMethodField()
-
-    # image = serializers.ImageField(source='event.image', read_only=True)
-
-    def get_image(self, obj) -> Union[None, str]:
-        return None
+    event = UserAchievementEvent(read_only=True)
