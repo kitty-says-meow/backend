@@ -2,6 +2,7 @@ from django.utils.functional import classproperty
 from rest_framework import serializers
 
 from achievements.models import Achievement
+from attachments.fields import ImageField
 from events.models import Event
 
 
@@ -23,6 +24,8 @@ class UserAchievementEvent(serializers.ModelSerializer):
         model = Event
         fields = ('id', 'name', 'category', 'image')
         read_only_fields = fields
+
+    image = ImageField()
 
 
 class UserAchievementSerializer(serializers.ModelSerializer):
