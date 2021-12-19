@@ -21,7 +21,7 @@ class AchievementSerializer(serializers.ModelSerializer):
 class UserAchievementEvent(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ('id', 'name', 'category',)
+        fields = ('id', 'name', 'category', 'image')
         read_only_fields = fields
 
 
