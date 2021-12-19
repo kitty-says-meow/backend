@@ -1,6 +1,7 @@
 from uuid import uuid4
 
 from django.db import models
+from django.db.models import F
 
 from departments.models import Department
 from events.enums import EventCategory, EventStatus
@@ -29,3 +30,14 @@ class Event(ExtendedModel):
 
     def __str__(self):
         return f'[{self.pk}] {self.name}'
+
+    def save(self, *args, **kwargs):
+        if self.status == EventStatus.REPORT_ACCEPTED:
+            achievements = self.achievements.filter(pgas_converted=False)
+            for achievement in achievements:
+                user = achievement.user
+                if user:
+                    user.pgas_score = F('pgas_score') + achievement.score
+                    user.save()
+            achievements.update(pgas_converted=True)
+        super().save(*args, **kwargs)
