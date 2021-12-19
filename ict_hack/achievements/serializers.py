@@ -34,3 +34,14 @@ class UserAchievementSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
     event = UserAchievementEvent(read_only=True)
+
+
+class AchievementRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Achievement
+        fields = (
+            'id', 'user', 'score', 'pgas_converted'
+        )
+        read_only_fields = fields
+
+    user = serializers.ReadOnlyField(source='user.username')

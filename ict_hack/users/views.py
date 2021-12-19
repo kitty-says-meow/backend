@@ -9,6 +9,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
+from achievements.models import Achievement
+from achievements.serializers import AchievementRatingSerializer
 from users.filters import UserFilter
 from users.models import User
 from users.openapi import *
@@ -24,6 +26,7 @@ class ProfilePermission(IsAuthenticated):
     retrieve=users_retrieve_schema,
     profile=users_profile_schema,
     rating=users_rating_schema,
+    rating_data=users_rating_data_schema,
     search=users_search_schema,
     score_convert=users_score_convert_schema,
     score_send=users_score_send_schema,
@@ -89,4 +92,9 @@ class UsersViewSet(GenericViewSet, RetrieveModelMixin):
     @action(detail=False, methods=['GET'], serializer_class=RatingSerializer)
     def rating(self, request, *args, **kwargs):
         self.queryset = User.objects.filter(is_staff=False).order_by('-pgas_score')
+        return self.search(request, *args, **kwargs)
+
+    @action(detail=False, methods=['GET'], serializer_class=AchievementRatingSerializer, url_path='rating-data')
+    def rating_data(self, request, *args, **kwargs):
+        self.queryset = Achievement.objects.filter(pgas_converted__isnull=False).order_by('pgas_converted')
         return self.search(request, *args, **kwargs)
