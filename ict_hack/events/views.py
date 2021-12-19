@@ -29,6 +29,7 @@ class EventJoinPermission(IsAuthenticated):
     list=events_list_schema,
     my=events_report_schema,
     report=events_report_schema,
+    join=events_join_schema,
 )
 class EventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin, ListModelMixin):
     queryset = Event.objects.all()

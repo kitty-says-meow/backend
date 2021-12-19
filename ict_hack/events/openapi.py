@@ -7,3 +7,4 @@ events_retrieve_schema = extend_schema(summary='Получить меропри�
 events_list_schema = extend_schema(summary='Получить список мероприятий')
 events_my_schema = extend_schema(summary='Получить список мероприятий моих клубов/подразделений')
 events_report_schema = extend_schema(summary='Загрузить отчет по мероприятию', responses={200: EventSerializer})
+events_join_schema = extend_schema(summary='Записаться на мероприятие', responses={201: ''})
