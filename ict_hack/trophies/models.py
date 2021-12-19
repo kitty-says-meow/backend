@@ -7,14 +7,14 @@ from utils.models import ExtendedModel
 class Trophies(models.IntegerChoices):
     EDUCATION_5 = 1, 'Учеба - 5'
     EDUCATION_10 = 2, 'Учеба - 10'
-    SCIENCE_5 = 3, 'Учеба - 5'
-    SCIENCE_10 = 4, 'Учеба - 10'
-    SOCIAL_5 = 5, 'Учеба - 5'
-    SOCIAL_10 = 6, 'Учеба - 10'
-    CULTURE_5 = 7, 'Учеба - 5'
-    CULTURE_10 = 8, 'Учеба - 10'
-    SPORT_5 = 9, 'Учеба - 5'
-    SPORT_10 = 10, 'Учеба - 10'
+    SCIENCE_5 = 3, 'Наука - 5'
+    SCIENCE_10 = 4, 'Наука - 10'
+    SOCIAL_5 = 5, 'Активность - 5'
+    SOCIAL_10 = 6, 'Активность - 10'
+    CULTURE_5 = 7, 'Культура - 5'
+    CULTURE_10 = 8, 'Культура - 10'
+    SPORT_5 = 9, 'Спорт - 5'
+    SPORT_10 = 10, 'Спорт - 10'
     PGAS_TOP3 = 11, 'Топ-3 в рейтинге'
 
 
