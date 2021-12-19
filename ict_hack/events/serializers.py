@@ -46,7 +46,7 @@ class EventReportSerializer(serializers.ModelSerializer):
     users = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='username', many=True)
 
     def update(self, instance, validated_data):
-        achievements = instance.achievements.all()
+        achievements = instance.achievements.all().order_by('id')
         users = validated_data.pop('users', None)
         if not (users is not None and len(users) == achievements.count()):
             raise ValidationError({'users': 'Количество пользователей должно совпадать с количеством достижений.'})
