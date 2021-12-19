@@ -7,17 +7,20 @@ from departments.fields import DepartmentField
 from events.enums import EventStatus
 from events.models import Event
 from users.models import User
+from users.serializers import ParticipantSerializer
 
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = (
-            'id', 'name', 'description', 'category', 'date_start', 'date_end', 'department', 'report', 'status', 'achievements'
+            'id', 'name', 'description', 'category', 'date_start', 'date_end', 'department', 'report', 'status', 'achievements',
+            'participants',
         )
 
     department = DepartmentField()
     achievements = AchievementSerializer(many=True)
+    participants = ParticipantSerializer(many=True)
 
     def validate(self, attrs):
         date_start, date_end = attrs.get('date_start'), attrs.get('date_end')

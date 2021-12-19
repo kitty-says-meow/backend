@@ -18,6 +18,11 @@ class EventReportPermission(IsAuthenticated):
         return obj.status == EventStatus.PENDING_REPORT and obj.department in request.user.departments.all()
 
 
+class EventJoinPermission(IsAuthenticated):
+    def has_object_permission(self, request, view, obj):
+        return obj.status == EventStatus.ACCEPTED and request.user != obj.department.owner
+
+
 @extend_schema_view(
     create=events_create_schema,
     retrieve=events_retrieve_schema,
@@ -46,3 +51,9 @@ class EventsViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin, ListMo
 
         output_serializer = EventSerializer(instance, context=self.get_serializer_context())
         return Response(output_serializer.data, status=200)
+
+    @action(detail=True, methods=['POST'], serializer_class=None)
+    def join(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.participants.add(self.request.user)
+        return Response(status=201)

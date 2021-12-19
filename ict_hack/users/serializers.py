@@ -34,3 +34,12 @@ class RatingSerializer(serializers.ModelSerializer):
             'username', 'first_name', 'last_name', 'pgas_score',
         )
         read_only_fields = fields
+
+
+class ParticipantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'username', 'first_name', 'last_name',
+        )
+        read_only_fields = fields
